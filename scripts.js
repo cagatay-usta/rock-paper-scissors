@@ -6,23 +6,53 @@ function getComputerChoice() {
     let number = getRndInt(1, 3);
     switch(number) {
         case 1:
-            choice = "rock"
-            break;
+            return "rock"
         case 2:
-            choice = "paper";
-            break;
+            return "paper";
         case 3:
-            choice = "scissors";
-            break;
+            return "scissors";
     }
-    return choice;
+    
 }
 
-function getPlayerChoice() {
+function playRound(playerSelection, computerSelection) {
+    // if same = draw | if ps: rock and cs: paper -> cs win  |
+    if (playerSelection === computerSelection) {
+        return "draw";
 
+    } else if ( (playerSelection == "rock"     && computerSelection == "paper") 
+        ||      (playerSelection == "paper"    && computerSelection == "scissors") 
+        ||      (playerSelection == "scissors" && computerSelection == "rock") ) {
+        return "computer wins";
+
+    } else {
+        return "player wins";
+    }
 }
 
-const computerSelection = getComputerChoice();
-const playerSelection = getPlayerChoice();
+function playGame(rounds) {
 
-console.log(computerSelection)
+    let playerWins = 0, computerWins = 0;
+
+    for (let i = 0; i < rounds; i++) {
+        const computerSelection = getComputerChoice();
+        const playerSelection = prompt("Enter one: rock, paper or scissors.").toLowerCase();
+        if (playRound(playerSelection, computerSelection) == "player wins") {
+            playerWins++;
+        } else if (playRound(playerSelection, computerSelection) == "computer wins") {
+            computerWins++;
+        }
+    }
+    if (playerWins > computerWins) {
+        return "player won the game";
+    } else if (playerWins < computerWins) {
+        return "computer won the game";
+    } else {
+        return "draw";
+    }
+}
+
+
+
+
+console.log(playGame(5))
