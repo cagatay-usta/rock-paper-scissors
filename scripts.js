@@ -37,12 +37,15 @@ function playGame(rounds) {
     for (let i = 0; i < rounds; i++) {
         const computerSelection = getComputerChoice();
         const playerSelection = prompt("Enter one: rock, paper or scissors.").toLowerCase();
-        if (playRound(playerSelection, computerSelection) == "player wins") {
+        const roundResult = playRound(playerSelection, computerSelection);
+        
+        if (roundResult == "player wins") {
             playerWins++;
-        } else if (playRound(playerSelection, computerSelection) == "computer wins") {
+        } else if (roundResult == "computer wins") {
             computerWins++;
         }
     }
+
     if (playerWins > computerWins) {
         return "player won the game";
     } else if (playerWins < computerWins) {
