@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: bisque;
+}
+
+p {
+    color: coral;
+    font-family: monospace, sans-seif;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.choice-container{
+    display: flex; 
+}
+
+#player-choice,
+#computer-choice {
+    margin: 36px;
+}
+
+
+.button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 240px;
+    
+}
+
+.selectbtn {
+    height: 128px;
+    width: 128px;
+    padding: 24px;
+    margin: 24px;
+
+    border-radius: 100%;
+    border-style: dashed;
+    border-color: aquamarine;
+    border-width: .5em;
+
+    background-color: coral;
+
+    font-family: monospace, sans-serif;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+
+    transition: 1s;
+}
+
+.selectbtn:hover {
+    
+    height: 169px;
+    width: 169px;
+
+}
+
+.chosen {
+    background-color: rgb(255, 25, 136);
+   
+}

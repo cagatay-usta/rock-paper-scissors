@@ -17,6 +17,9 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     // if same = draw | if ps: rock and cs: paper -> cs win  |
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
+
     if (playerSelection === computerSelection) {
         return "draw";
 
@@ -30,32 +33,75 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function playGame(rounds) {
 
-    let playerWins = 0, computerWins = 0;
 
-    for (let i = 0; i < rounds; i++) {
-        const computerSelection = getComputerChoice();
-        const playerSelection = prompt("Enter one: rock, paper or scissors.").toLowerCase();
-        const roundResult = playRound(playerSelection, computerSelection);
-        
-        if (roundResult == "player wins") {
-            playerWins++;
-        } else if (roundResult == "computer wins") {
-            computerWins++;
-        }
-    }
+const choices = {player: "", computer: ""};
+function playerSelection(item) {
+    item.addEventListener('click', (e) => {
+        choices.player = item.innerHTML;
+        document.querySelector("#player-choice").innerHTML = 
+        `You: ${choices.player}`;
+        item.classList.add('chosen');
+    });
+}
 
-    if (playerWins > computerWins) {
-        return "player won the game";
-    } else if (playerWins < computerWins) {
-        return "computer won the game";
-    } else {
-        return "draw";
-    }
+function clearClass() {
+    buttons.forEach( function(item) {
+        item.classList.remove('chosen');
+    });
 }
 
 
 
+// listen for player input 
 
-console.log(playGame(5))
+const buttons = document.querySelectorAll('.selectbtn');
+buttons.forEach(playerSelection);
+
+
+const score = document.querySelector('#score');
+
+const playerChoice = document.querySelector('#player-choice');
+const computerChoice = document.querySelector('#computer-choice');
+
+let playerWins = 0;
+let computerWins = 0;
+window.addEventListener('click', (e) => {
+    
+    if (choices.player == '') {
+        return
+    } 
+
+    choices.computer = getComputerChoice().toUpperCase();
+    computerChoice.innerHTML = `Computer: ${choices.computer}`;
+
+    const roundWinner = playRound(choices.player, choices.computer);
+
+    if (roundWinner === 'player wins') {
+        playerWins++;
+    } else if (roundWinner == 'computer wins') {
+        computerWins++;
+    }
+    choices.player ="";
+    choices.computer = "";
+    score.innerHTML = `You: ${playerWins} Computer: ${computerWins}`;
+
+
+    // merge these functions to shorter
+    if (playerWins === 5) {
+        alert("You won!");
+        playerWins = 0;
+        computerWins = 0; 
+        score.innerHTML = `You: ${playerWins} Computer: ${computerWins}`;
+    }
+    if (computerWins === 5) {
+        alert("Computer Won!");
+        playerWins = 0;
+        computerWins = 0;
+        score.innerHTML = `You: ${playerWins} Computer: ${computerWins}`;
+    }
+
+    setTimeout(clearClass, 800);
+    
+    
+})
