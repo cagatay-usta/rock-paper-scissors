@@ -88,16 +88,10 @@ window.addEventListener('click', (e) => {
 
 
     // merge these functions to shorter
-    if (playerWins === 5) {
-        alert("You won!");
+    if ( (playerWins === 5) || (computerWins === 5) ) {
+        (playerWins > computerWins) ? alert("You Won!") : alert("Computer Won!");
         playerWins = 0;
         computerWins = 0; 
-        score.innerHTML = `You: ${playerWins} Computer: ${computerWins}`;
-    }
-    if (computerWins === 5) {
-        alert("Computer Won!");
-        playerWins = 0;
-        computerWins = 0;
         score.innerHTML = `You: ${playerWins} Computer: ${computerWins}`;
     }
 
